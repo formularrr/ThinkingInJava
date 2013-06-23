@@ -40,6 +40,10 @@ public class Sequence{
 		return this.new SequenceSelector();
 	}
 	
+	public Selector reverseSelector(){
+		return this.new ReverseSelector();
+	}
+	
 	class SequenceSelector implements Selector{
 		
 		private int i=0;
@@ -55,6 +59,37 @@ public class Sequence{
 		public void next(){
 			if(i < item.length)
 				i++;
+		}
+		
+		public String toString(){
+			return sequence;
+		}
+		
+		private String isOuterVisit(){
+			return "outer visits inner's private methods";
+		}
+		
+		public Sequence sequence(){
+			
+			return Sequence.this;
+		}
+	}
+	
+	class ReverseSelector implements Selector{
+		
+		private int i = next-1;
+		
+		public boolean end(){
+			return i == -1;
+		}
+		
+		public Object current(){
+			return item[i];
+		}
+		
+		public void next(){
+			if(i < item.length)
+				i--;
 		}
 		
 		public String toString(){
@@ -88,12 +123,20 @@ public class Sequence{
 			selector.next();
 		}
 		
+		ReverseSelector reverseSelector = sq.new ReverseSelector();
+		
+		while(!reverseSelector.end()){
+			System.out.print(reverseSelector.current() + " ");
+			reverseSelector.next();
+		}
+		
 		Sequence String = new Sequence("\n Show sequence by InnerClass");
 		
 		SequenceSelector sequenceSelector = String.new SequenceSelector();
 		
+		
 		//System.out.println(String.selector().toString());
-		System.out.println(sequenceSelector.i);
+		
 		
 		//System.out.println(sequenceSelector.sequence().selector().isOuterVisit());
 	}
