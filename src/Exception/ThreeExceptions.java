@@ -70,7 +70,9 @@ public class ThreeExceptions{
 				}catch(Exception e){
 					e.printStackTrace();
 					System.out.println(e.getMessage());
-				}
+					}finally{
+						System.out.println("final");
+					}
 		}
 	}
 }

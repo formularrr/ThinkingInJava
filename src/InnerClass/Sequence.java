@@ -1,4 +1,5 @@
 package InnerClass;
+import java.io.*;
 
 interface Selector{
 	boolean end();
@@ -18,6 +19,21 @@ class StringSequence{
 	}
 }
 
+class NotEnoughSpaceException extends Exception{
+	private String err;
+	public NotEnoughSpaceException(String s){
+		err =s ; 
+	}
+	
+	public String toString(){
+		return "Not enough space :" + err;
+	}
+	
+	public String getMessage(){
+		return "Not enough space :" + err;
+	}
+}
+
 public class Sequence{
 	private Object[] item;
 	private int next = 0;
@@ -25,15 +41,17 @@ public class Sequence{
 	
 	public Sequence(int size){
 		item = new Object[size];
+		next = 0 ;
 	}
 	
 	public Sequence(String sequence){
 		this.sequence = sequence;
 	}
 	
-	public void add(Object x){
+	public void add(Object x) throws NotEnoughSpaceException{
 		if(next < item.length)
 			item[next++] = x;
+		else throw new NotEnoughSpaceException("to small");
 	}
 	
 	public Selector selector(){
@@ -106,7 +124,7 @@ public class Sequence{
 		}
 	}
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws NotEnoughSpaceException{
 		StringSequence s1 = new StringSequence("first");
 		StringSequence s2 = new StringSequence("second");
 		StringSequence s3 = new StringSequence("third");
@@ -115,6 +133,7 @@ public class Sequence{
 		sq.add(s1);
 		sq.add(s2);
 		sq.add(s3);
+		//sq.add(s3);
 		
 		Selector selector = sq.selector();
 		
