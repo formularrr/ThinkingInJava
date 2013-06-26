@@ -9,7 +9,7 @@ public class WithFinally{
 		try{
 			sw.on();
 			OnOffSwitch.f();
-			OnOffException1 e = new OnOffException1();
+			On OffException1 e = new OnOffException1();
 			e.initCause(new NullPointerException());
 			throw e;
 			}catch(OnOffException1 e){
